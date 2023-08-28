@@ -1,0 +1,9 @@
+/* --------------------- */
+/* OVERWRITTEN BOOTSTRAP */
+/* --------------------- */
+.border-bottom {
+    border-color: rgb(202, 164, 137) !important;
+}
+.background-book {
+    background-color: rgb(243, 231, 219);
+}
