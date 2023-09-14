@@ -1,9 +1,23 @@
 /* --------------------- */
 /* OVERWRITTEN BOOTSTRAP */
 /* --------------------- */
+mark, .background-book {
+    background-color: rgb(243, 231, 219);
+}
+.bookishop-logo {
+    font-family: "Gill Sans";
+}
+.nav-link.active, .color-book {
+    color: rgb(150, 122, 102) !important;
+}
+.nav-item:hover {
+    text-decoration: underline;
+}
 .border-bottom {
     border-color: rgb(202, 164, 137) !important;
 }
-.background-book {
+.btn-outline-book, .btn-outline-book:hover {
     background-color: rgb(243, 231, 219);
+    border-color: rgb(202, 164, 137);
+    color: rgb(202, 164, 137);
 }
