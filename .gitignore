@@ -8,9 +8,12 @@ __pycache__/
 .env
 venv/
 
-# Django stuff:
-*.log
+# Translations
+*.mo
 *.pot
+
+# Django stuff
+*.log
 *.pyc
 local_settings.py
 db.sqlite3
