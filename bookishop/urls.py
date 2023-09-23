@@ -8,5 +8,6 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
+    path('rosetta/', include('rosetta.urls')),
     path('', include('pages.urls')),
 )

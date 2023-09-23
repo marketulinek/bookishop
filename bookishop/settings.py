@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     # Project Apps
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
+    # Third Party
+    'rosetta',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +119,8 @@ LANGUAGES = [
     ['en', 'English'],
     ['cs', 'Čeština']
 ]
+
+ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
 
 # Static files (CSS, JavaScript, Images)
