@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     # Project Apps
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
+    # Third Party
+    'rosetta',
 ]
 
 MIDDLEWARE = [
@@ -38,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'bookishop.urls'
@@ -98,13 +101,26 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
+
+LANGUAGES = [
+    ['en', 'English'],
+    ['cs', 'Čeština']
+]
+
+ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
 
 # Static files (CSS, JavaScript, Images)
