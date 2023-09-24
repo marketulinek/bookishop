@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="btn-group">
+    <a class="btn btn-outline-book color-book" href="{% url 'login' %}" role="button">{% translate 'Login' %}</a>
+    <button type="button" class="btn btn-outline-book color-book dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item link-outline-book" href="#">{% translate 'Sign up' %}</a></li>
+    </ul>
+</div>
