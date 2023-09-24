@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-22 16:49+0000\n"
-"PO-Revision-Date: 2023-09-22 17:06+0000\n"
+"POT-Creation-Date: 2023-09-24 18:42+0000\n"
+"PO-Revision-Date: 2023-09-24 18:46+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -13,25 +13,33 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: templates/_base.html:43
+#: templates/_base.html:58
 msgid "Home"
 msgstr "Domů"
 
-#: templates/_base.html:44
+#: templates/_base.html:59
 msgid "Categories"
 msgstr "Kategorie"
 
-#: templates/_base.html:45
+#: templates/_base.html:60
 msgid "Order Status"
 msgstr "Objednávky"
 
-#: templates/_base.html:46
+#: templates/_base.html:61
 msgid "Wishlist"
 msgstr "Seznam přání"
 
-#: templates/_base.html:47
+#: templates/_base.html:62
 msgid "About"
 msgstr "O projektu"
+
+#: templates/_components/btn_login_signup.html:4
+msgid "Login"
+msgstr "Přihlásit"
+
+#: templates/_components/btn_login_signup.html:10
+msgid "Sign up"
+msgstr "Registrace"
 
 #: templates/home.html:6
 msgid "Hello reader!"
@@ -40,3 +48,7 @@ msgstr "Ahoj čtenáři!"
 #: templates/home.html:37
 msgid "Add to basket!"
 msgstr "Do košíku"
+
+#: templates/registration/login.html:5 templates/registration/login.html:17
+msgid "Log In"
+msgstr "Přihlásit se"

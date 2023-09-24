@@ -33,6 +33,21 @@
                 </div>
             </form>
             <ul class="nav">
+                <li class="nav-item ms-1">
+                    {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <button class="btn btn-outline-book color-book dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.username }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item link-outline-book" href="{% url 'logout' %}">Log Out</a></li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        {% include '_components/btn_login_signup.html' %}
+                    {% endif %}
+                </li>
                 <li class="nav-item ms-1">{% include '_components/btn_lang_choice.html' %}</li>
             </ul>
         </div>
