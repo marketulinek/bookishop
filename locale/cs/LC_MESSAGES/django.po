@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-24 18:42+0000\n"
+"POT-Creation-Date: 2023-09-25 19:53+0000\n"
 "PO-Revision-Date: 2023-09-24 18:46+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
@@ -10,7 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
+"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: templates/_base.html:58
@@ -38,7 +39,8 @@ msgid "Login"
 msgstr "Přihlásit"
 
 #: templates/_components/btn_login_signup.html:10
-msgid "Sign up"
+#: templates/registration/signup.html:5 templates/registration/signup.html:13
+msgid "Sign Up"
 msgstr "Registrace"
 
 #: templates/home.html:6
@@ -52,3 +54,8 @@ msgstr "Do košíku"
 #: templates/registration/login.html:5 templates/registration/login.html:17
 msgid "Log In"
 msgstr "Přihlásit se"
+
+#: templates/registration/signup.html:19
+msgctxt "Button to confirm sign up action"
+msgid "Sign Up"
+msgstr "Zaregistrovat se"
