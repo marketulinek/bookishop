@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-25 19:53+0000\n"
+"POT-Creation-Date: 2023-09-25 21:15+0000\n"
 "PO-Revision-Date: 2023-09-24 18:46+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: templates/_base.html:44
+msgid "Log Out"
+msgstr "Odhlásit se"
 
 #: templates/_base.html:58
 msgid "Home"

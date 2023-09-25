@@ -41,7 +41,7 @@
                                 {{ user.username }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item link-outline-book" href="{% url 'logout' %}">Log Out</a></li>
+                                <li><a class="dropdown-item link-outline-book" href="{% url 'logout' %}">{% translate 'Log Out' %}</a></li>
                             </ul>
                         </div>
                     {% else %}
