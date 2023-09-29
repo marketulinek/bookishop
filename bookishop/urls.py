@@ -13,3 +13,7 @@ urlpatterns += i18n_patterns(
     path('accounts/', include('accounts.urls')),
     path('', include('pages.urls')),
 )
+
+admin.site.site_header = 'Bookishop Admin'
+admin.site.index_title = 'Site administration'
+admin.site.site_title = 'Bookishop'
