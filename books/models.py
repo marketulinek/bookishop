@@ -4,6 +4,17 @@ from django.utils.crypto import get_random_string
 from django.utils.text import slugify
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
+
+
 class Publisher(models.Model):
     name = models.CharField(max_length=255)
 

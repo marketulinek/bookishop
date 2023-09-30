@@ -1,6 +1,20 @@
 from django.test import TestCase
 
-from .models import Author
+from .models import Author, Category
+
+
+class CategoryTests(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.category = Category.objects.create(
+            name='Fantasy',
+            slug='fantasy'
+        )
+
+    def test_category_model(self):
+        self.assertEqual(self.category.name, 'Fantasy')
+        self.assertEqual(self.category.slug, 'fantasy')
 
 
 class AuthorTests(TestCase):
