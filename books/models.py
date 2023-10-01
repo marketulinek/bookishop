@@ -50,3 +50,38 @@ class Author(models.Model):
         new_slug = f"{get_random_string(8, allowed_chars='0123456789')} {self.full_name}"
         self.slug = slugify(new_slug)
         super().save(*args, **kwargs)
+
+
+class Book(models.Model):
+    BOOK_FORMAT = [
+        ('hardcover', 'Hardcover'),
+        ('paperback', 'Paperback')
+    ]
+
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(Author, related_name='books', on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, related_name='books', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='books', on_delete=models.CASCADE)
+    format = models.CharField(max_length=16, choices=BOOK_FORMAT)
+    description = models.TextField(blank=True)
+    published_at = models.DateField()
+    slug = models.SlugField(max_length=300, unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        pass
+        # return reverse('book_detail', kwargs={'slug': self.slug})
+
+    def is_published(self):
+        pass
+
+    def year_of_publication(self):
+        return self.published_at.year
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            new_slug = f"{get_random_string(8, allowed_chars='0123456789')} {self.title}"
+            self.slug = slugify(new_slug)
+            super().save(*args, **kwargs)

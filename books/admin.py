@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Publisher, Author
+from .models import Author, Book, Category, Publisher
 
 
 @admin.register(Category)
@@ -14,6 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PublisherAdmin(admin.ModelAdmin):
     list_display = ['name']
     ordering = ['name']
+    search_fields = ['name']
     list_per_page = 25
 
 
@@ -23,3 +24,12 @@ class AuthorAdmin(admin.ModelAdmin):
     exclude = ['slug']
     ordering = ['last_name', 'first_name', 'middle_name']
     search_fields = ['last_name', 'first_name', 'middle_name']
+
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ['title', 'author', 'category', 'format', 'published_at', 'slug']
+    autocomplete_fields = ['author', 'publisher']
+    exclude = ['slug']
+    list_filter = ['category']
+    date_hierarchy = 'published_at'
