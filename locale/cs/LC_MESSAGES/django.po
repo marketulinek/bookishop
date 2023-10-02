@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-25 21:15+0000\n"
+"POT-Creation-Date: 2023-10-01 06:23+0000\n"
 "PO-Revision-Date: 2023-09-24 18:46+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
@@ -14,27 +14,27 @@ msgstr ""
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: templates/_base.html:44
+#: templates/_base.html:45
 msgid "Log Out"
 msgstr "Odhlásit se"
 
-#: templates/_base.html:58
+#: templates/_base.html:59
 msgid "Home"
 msgstr "Domů"
 
-#: templates/_base.html:59
+#: templates/_base.html:60
 msgid "Categories"
 msgstr "Kategorie"
 
-#: templates/_base.html:60
+#: templates/_base.html:61
 msgid "Order Status"
 msgstr "Objednávky"
 
-#: templates/_base.html:61
+#: templates/_base.html:62
 msgid "Wishlist"
 msgstr "Seznam přání"
 
-#: templates/_base.html:62
+#: templates/_base.html:63
 msgid "About"
 msgstr "O projektu"
 
@@ -46,6 +46,22 @@ msgstr "Přihlásit"
 #: templates/registration/signup.html:5 templates/registration/signup.html:13
 msgid "Sign Up"
 msgstr "Registrace"
+
+#: templates/categories/translations.html:1
+msgid "Professional and Technical Literature"
+msgstr "Odborná a technická literatura"
+
+#: templates/categories/translations.html:2
+msgid "Fantasy and Sci-fi"
+msgstr "Fantasy a sci-fi"
+
+#: templates/categories/translations.html:3
+msgid "Fiction"
+msgstr "Beletrie"
+
+#: templates/categories/translations.html:4
+msgid "Coloring Books"
+msgstr "Omalovánky"
 
 #: templates/home.html:6
 msgid "Hello reader!"

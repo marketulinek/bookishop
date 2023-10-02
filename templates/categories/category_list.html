@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">{% endblock stylesheet %}
+
+{% block content %}
+<div id="category_list" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">
+    {% for category in category_list %}
+    <div class="col">
+        <div class="card text-bg-dark">
+            <img src="{% static 'images/' %}{{ category.slug }}.png" class="card-img" alt="{{ category.name }}">
+            <div class="card-img-overlay">
+                <div class="category_label shadow-lg p-3 mb-5 bg-body-tertiary rounded text-center fs-5 fw-light">
+                    {% translate category.name %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -12,6 +12,7 @@ urlpatterns += i18n_patterns(
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('', include('pages.urls')),
+    path('', include('books.urls')),
 )
 
 admin.site.site_header = 'Bookishop Admin'
