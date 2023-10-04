@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.db import models
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify
 
@@ -13,6 +14,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('books_by_category', kwargs={'slug': self.slug})
 
 
 class Publisher(models.Model):
@@ -84,4 +88,4 @@ class Book(models.Model):
         if self._state.adding:
             new_slug = f"{get_random_string(8, allowed_chars='0123456789')} {self.title}"
             self.slug = slugify(new_slug)
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)

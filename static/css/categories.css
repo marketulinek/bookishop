@@ -7,3 +7,8 @@
     background-color: white;
     color: black;
 }
+
+#category-intro-picture .card-title {
+    font-size: calc(4em + 3vmin);
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
