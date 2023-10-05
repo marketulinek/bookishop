@@ -35,13 +35,13 @@ class Author(models.Model):
     @property
     def full_name(self):
         name = f'{self.first_name} {self.middle_name} {self.last_name}'
-        return ' '.join(name.split())
+        return name.replace('  ', ' ')
 
     @property
     @admin.display(description='Name')
     def full_name_reversed(self):
         name = f'{self.last_name}, {self.first_name} {self.middle_name}'
-        return ' '.join(name.split())
+        return name.strip()
 
     def __str__(self):
         return self.full_name
