@@ -75,10 +75,10 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        pass
-        # return reverse('book_detail', kwargs={'slug': self.slug})
+        return reverse('book_detail', kwargs={'slug': self.slug})
 
     def is_published(self):
+        # TODO: is_published() in Book model
         pass
 
     def year_of_publication(self):

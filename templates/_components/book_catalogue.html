@@ -1,15 +1,18 @@
 {% load static %}
 {% load i18n %}
+
 {% for book in books %}
   <div class="col">
     <div class="card h-100">
-      <div class="card-body p-0">
-        <img src="{% static 'images/' %}no_cover.jpg" class="card-img-top" alt="...">
-      </div>
+      <a href="{{ book.get_absolute_url }}">
+        <div class="card-body p-0">
+          <img src="{% static 'images/' %}no_cover.jpg" class="card-img-top" alt="{{ book.title }}">
+        </div>
 
-      <div class="card-body pb-0">
-        <h5 class="card-title ps-1">{{ book.title }}</h5>
-      </div>
+        <div class="card-body pb-0">
+          <h5 class="card-title ps-1">{{ book.title }}</h5>
+        </div>
+      </a>
       <div class="card-footer pt-0 border-0 bg-transparent">
         <h6 class="card-title ps-1">{{ book.author }}</h6>
       </div>
@@ -24,7 +27,7 @@
         </p>
         <h4 class="ps-1">499,-</h4>
         <div class="d-grid gap-2">
-          <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Add to basket!' %}</a>
+          <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Add to basket' %}!</a>
         </div>
       </div>
     </div>
