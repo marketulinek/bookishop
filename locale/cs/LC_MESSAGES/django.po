@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-25 21:15+0000\n"
+"POT-Creation-Date: 2023-10-06 19:34+0000\n"
 "PO-Revision-Date: 2023-09-24 18:46+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
@@ -14,29 +14,34 @@ msgstr ""
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: templates/_base.html:44
+#: templates/_base.html:45
 msgid "Log Out"
 msgstr "Odhlásit se"
 
-#: templates/_base.html:58
+#: templates/_base.html:59
 msgid "Home"
 msgstr "Domů"
 
-#: templates/_base.html:59
+#: templates/_base.html:60
 msgid "Categories"
 msgstr "Kategorie"
 
-#: templates/_base.html:60
+#: templates/_base.html:61
 msgid "Order Status"
 msgstr "Objednávky"
 
-#: templates/_base.html:61
+#: templates/_base.html:62
 msgid "Wishlist"
 msgstr "Seznam přání"
 
-#: templates/_base.html:62
+#: templates/_base.html:63
 msgid "About"
 msgstr "O projektu"
+
+#: templates/_components/book_catalogue.html:30
+#: templates/books/book_detail.html:34
+msgid "Add to basket"
+msgstr "Do košíku"
 
 #: templates/_components/btn_login_signup.html:4
 msgid "Login"
@@ -47,13 +52,33 @@ msgstr "Přihlásit"
 msgid "Sign Up"
 msgstr "Registrace"
 
+#: templates/books/book_detail.html:35
+msgid "Add to wishlist"
+msgstr "Do košíku"
+
+#: templates/categories/books_by_category.html:25
+msgid "There are no books in this category"
+msgstr "V této kategorii nebyly nalezeny žádné knihy"
+
+#: templates/categories/translations.html:1
+msgid "Technology & Engineering"
+msgstr "Technologie a inženýrství"
+
+#: templates/categories/translations.html:2
+msgid "Fantasy & Sci-fi"
+msgstr "Fantasy a sci-fi"
+
+#: templates/categories/translations.html:3
+msgid "Fiction"
+msgstr "Beletrie"
+
+#: templates/categories/translations.html:4
+msgid "Coloring Books"
+msgstr "Omalovánky"
+
 #: templates/home.html:6
 msgid "Hello reader!"
 msgstr "Ahoj čtenáři!"
-
-#: templates/home.html:37
-msgid "Add to basket!"
-msgstr "Do košíku"
 
 #: templates/registration/login.html:5 templates/registration/login.html:17
 msgid "Log In"

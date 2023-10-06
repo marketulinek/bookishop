@@ -10,7 +10,7 @@ mark, .background-book {
 .nav-item:hover {
     text-decoration: underline;
 }
-.border-bottom, .form-switch-lang {
+.border-bottom, .form-switch-lang, .shop-card {
     border-color: rgb(202, 164, 137) !important;
 }
 .btn-outline-book, .btn-outline-book:hover {

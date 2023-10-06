@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # Project Apps
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
     # Third Party
     'rosetta',
     'crispy_forms',

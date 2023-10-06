@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate category.name %}{% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">{% endblock stylesheet %}
+
+{% block content %}
+<div id="category-intro-picture" class="card text-bg-dark">
+    <img src="{% static 'images/' %}{{ category.slug }}.jpg" class="card-img" alt="{% translate category.name %}"
+         height="250">
+    <div class="card-img-overlay">
+        <h1 class="card-title text-center">{% translate category.name %}</h1>
+    </div>
+</div>
+
+{% if books|length > 0 %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-xl-6 g-4 mt-1">
+      {% include '_components/book_catalogue.html' %}
+    </div>
+{% else %}
+    <div class="alert alert-secondary mt-5" role="alert">
+        <h5 class="alert-heading text-center">{% translate 'There are no books in this category' %} :-(</h5>
+    </div>
+{% endif %}
+{% endblock content %}

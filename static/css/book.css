@@ -1,0 +1,14 @@
+#book-details div {
+    border-bottom: 1px solid #DDD;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#book-details label {
+    min-width: 130px;
+    font-weight: 700;
+}
+
+.btn-wishlist {
+    background-color: white;
+}
