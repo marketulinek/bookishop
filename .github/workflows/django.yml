@@ -40,7 +40,7 @@ jobs:
         python manage.py test
       env:
         SECRET_KEY: test-secret-key
-        ALLOWED_HOSTS: localhost
         DB_NAME: postgres
         DB_USER: postgres
         DB_PASSWORD: postgres
+        DB_HOST: 127.0.0.1
