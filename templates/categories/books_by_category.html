@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{{ category.name }}{% endblock title %}
+{% block title %}{% translate category.name %}{% endblock title %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/categories.css' %}">{% endblock stylesheet %}
@@ -22,7 +22,7 @@
     </div>
 {% else %}
     <div class="alert alert-secondary mt-5" role="alert">
-        <h5 class="alert-heading text-center">There are no books in this category :-(</h5>
+        <h5 class="alert-heading text-center">{% translate 'There are no books in this category' %} :-(</h5>
     </div>
 {% endif %}
 {% endblock content %}
