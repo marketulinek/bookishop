@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9, '3.10']
+        python-version: ['3.10']
 
     steps:
     - uses: actions/checkout@v3
@@ -31,3 +31,6 @@ jobs:
       env:
         SECRET_KEY: test-secret-key
         ALLOWED_HOSTS: localhost
+        DB_NAME: mydb
+        DB_USER: userdb
+        DB_PASSWORD: password
