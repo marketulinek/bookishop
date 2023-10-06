@@ -15,6 +15,16 @@ jobs:
       matrix:
         python-version: ['3.10']
 
+    services:
+      db:
+        image: postgres
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -31,6 +41,6 @@ jobs:
       env:
         SECRET_KEY: test-secret-key
         ALLOWED_HOSTS: localhost
-        DB_NAME: mydb
-        DB_USER: userdb
-        DB_PASSWORD: password
+        DB_NAME: postgres
+        DB_USER: postgres
+        DB_PASSWORD: postgres
