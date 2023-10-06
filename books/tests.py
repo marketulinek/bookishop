@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from .models import Author, Category
 
@@ -15,6 +16,24 @@ class CategoryTests(TestCase):
     def test_category_model(self):
         self.assertEqual(self.category.name, 'Fantasy')
         self.assertEqual(self.category.slug, 'fantasy')
+
+    def test_category_list_view(self):
+        response = self.client.get(reverse('category_list'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Fantasy')
+        self.assertTemplateUsed(response, 'categories/category_list.html')
+
+    def test_category_book_list_view(self):
+        response = self.client.get(self.category.get_absolute_url())
+        no_response = self.client.get('categories/lorem-ipsum')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Fantasy')
+        self.assertContains(response, 'There are no books in this category :-(')
+        self.assertNotContains(response, 'Harry Potter')
+        self.assertTemplateUsed(response, 'categories/books_by_category.html')
+        self.assertEqual(no_response.status_code, 404)
 
 
 class AuthorTests(TestCase):
