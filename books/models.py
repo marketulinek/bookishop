@@ -92,6 +92,7 @@ class Book(SlugUrl):
     format = models.CharField(max_length=16, choices=BOOK_FORMAT)
     description = models.TextField(blank=True)
     published_at = models.DateField()
+    cover = models.ImageField(upload_to='covers/', blank=True)
 
     class Settings:
         url_view_name = 'book_detail'
