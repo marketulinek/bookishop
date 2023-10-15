@@ -1,3 +1,4 @@
+import django.contrib.staticfiles.storage
 from decouple import config
 from pathlib import Path
 
@@ -136,6 +137,10 @@ ROSETTA_SHOW_AT_ADMIN_PANEL = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
