@@ -17,12 +17,16 @@
 </div>
 
 {% if books|length > 0 %}
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-xl-6 g-4 mt-1">
-      {% include '_components/book_catalogue.html' %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-xl-6 g-4 mt-1">
+    {% for book in books %}
+    <div class="col">
+        {% include '_components/book_card.html' %}
     </div>
+    {% endfor %}
+</div>
 {% else %}
-    <div class="alert alert-secondary mt-5" role="alert">
-        <h5 class="alert-heading text-center">{% translate 'There are no books in this category' %} :-(</h5>
-    </div>
+<div class="alert alert-secondary mt-5" role="alert">
+    <h5 class="alert-heading text-center">{% translate 'There are no books in this category' %} :-(</h5>
+</div>
 {% endif %}
 {% endblock content %}
