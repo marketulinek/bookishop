@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<div class="slider row g-4 mt-1">
+    {% for book in new_books %}
+    <div class="col px-3">
+        {% include '_components/book_card.html' %}
+    </div>
+    {% endfor %}
+
+    <div class="slider-card-more col px-3">
+        <div class="card book-card h-100 border-0 text-center">
+            <a href="#"></a>
+            <div class="card-footer pt-0 border-0 bg-transparent">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                <p class="color-book fw-bold mt-3">{% translate 'More' %}</p>
+            </div>
+        </div>
+    </div>
+</div>
