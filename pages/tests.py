@@ -1,21 +1,36 @@
-from django.test import SimpleTestCase
+from django.test import TestCase
 from django.urls import reverse
 
+from books.models import Author, Book, Category, Publisher
 
-class HomepageTests(SimpleTestCase):
 
-    def setUp(self):
-        url = reverse('home')
-        self.response = self.client.get(url)
+class HomepageTests(TestCase):
 
-    def test_homepage_url_name(self):
-        self.assertEqual(self.response.status_code, 200)
+    @classmethod
+    def setUpTestData(cls):
+        cls.publisher = Publisher.objects.create(name='Bloomsbury')
+        cls.category = Category.objects.create(name='Fantasy', slug='fantasy')
 
-    def test_homepage_template(self):
-        self.assertTemplateUsed(self.response, 'home.html')
+        cls.author = Author.objects.create(
+            first_name='Joanne',
+            middle_name='K.',
+            last_name='Rowling'
+        )
 
-    def test_homepage_contains_correct_html(self):
-        self.assertContains(self.response, 'Hello reader!')
+        cls.book = Book.objects.create(
+            title='Harry Potter',
+            author=cls.author,
+            publisher=cls.publisher,
+            category=cls.category,
+            format='paperback',
+            description='Boy Who Lived',
+            published_at='1997-06-26'
+        )
 
-    def test_homepage_does_not_contain_incorrect_html(self):
-        self.assertNotContains(self.response, 'This should not be on the page.')
+    def test_homepage(self):
+        response = self.client.get(reverse('home'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home.html')
+        self.assertContains(response, 'New books')
+        self.assertNotContains(response, 'This should not be on the page.')

@@ -10,7 +10,7 @@ mark, .background-book {
 .nav-item:hover {
     text-decoration: underline;
 }
-.border-bottom, .form-switch-lang, .shop-card {
+.border-bottom, .form-switch-lang {
     border-color: rgb(202, 164, 137) !important;
 }
 .btn-outline-book, .btn-outline-book:hover {
@@ -36,4 +36,43 @@ mark, .background-book {
     color: black;
     border: none;
     border-radius: 0;
+}
+
+
+/* ----------------------- */
+/* HOMEPAGE - slick slider */
+/* ----------------------- */
+.slick-prev, .slick-next {
+    width: 40px;
+    height: 40px;
+}
+.slick-prev::before, .slick-next::before {
+    color: rgb(202, 164, 137);
+    font-size: 40px;
+}
+.slider-card-more {
+    height: 434px;
+}
+.slider-card-more .book-card{
+    background-image: linear-gradient(rgba(243, 231, 219, 0.3), rgba(243, 231, 219, 0.3), white);
+}
+.slider-card-more svg {
+    margin-top: 50px;
+    color: rgb(150, 122, 102);
+}
+
+/* ----------------------- */
+/*          BOOKS          */
+/* ----------------------- */
+.book-card img {
+    height: 205px;
+    width: auto;
+}
+.no-book-cover {
+    height: 205px;
+    background-color: rgba(243, 231, 219, 0.3);
+}
+.no-book-cover svg {
+    margin-top: 50px;
+    color: rgb(150, 122, 102);
 }
