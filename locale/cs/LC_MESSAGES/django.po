@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-06 19:34+0000\n"
+"POT-Creation-Date: 2023-10-16 18:43+0000\n"
 "PO-Revision-Date: 2023-09-24 18:46+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
@@ -14,34 +14,37 @@ msgstr ""
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: templates/_base.html:45
+#: templates/_base.html:48
 msgid "Log Out"
 msgstr "Odhlásit se"
 
-#: templates/_base.html:59
+#: templates/_base.html:62
 msgid "Home"
 msgstr "Domů"
 
-#: templates/_base.html:60
+#: templates/_base.html:63
 msgid "Categories"
 msgstr "Kategorie"
 
-#: templates/_base.html:61
+#: templates/_base.html:64
 msgid "Order Status"
 msgstr "Objednávky"
 
-#: templates/_base.html:62
+#: templates/_base.html:65
 msgid "Wishlist"
 msgstr "Seznam přání"
 
-#: templates/_base.html:63
+#: templates/_base.html:66
 msgid "About"
 msgstr "O projektu"
 
-#: templates/_components/book_catalogue.html:30
-#: templates/books/book_detail.html:34
+#: templates/_components/book_card.html:36 templates/books/book_detail.html:36
 msgid "Add to basket"
 msgstr "Do košíku"
+
+#: templates/_components/book_list_slider.html:17
+msgid "More"
+msgstr "Více"
 
 #: templates/_components/btn_login_signup.html:4
 msgid "Login"
@@ -52,11 +55,11 @@ msgstr "Přihlásit"
 msgid "Sign Up"
 msgstr "Registrace"
 
-#: templates/books/book_detail.html:35
+#: templates/books/book_detail.html:37
 msgid "Add to wishlist"
 msgstr "Do košíku"
 
-#: templates/categories/books_by_category.html:25
+#: templates/categories/books_by_category.html:29
 msgid "There are no books in this category"
 msgstr "V této kategorii nebyly nalezeny žádné knihy"
 
@@ -76,9 +79,9 @@ msgstr "Beletrie"
 msgid "Coloring Books"
 msgstr "Omalovánky"
 
-#: templates/home.html:6
-msgid "Hello reader!"
-msgstr "Ahoj čtenáři!"
+#: templates/home.html:13
+msgid "New books"
+msgstr "Novinky"
 
 #: templates/registration/login.html:5 templates/registration/login.html:17
 msgid "Log In"
@@ -88,3 +91,6 @@ msgstr "Přihlásit se"
 msgctxt "Button to confirm sign up action"
 msgid "Sign Up"
 msgstr "Zaregistrovat se"
+
+#~ msgid "Hello reader!"
+#~ msgstr "Ahoj čtenáři!"
