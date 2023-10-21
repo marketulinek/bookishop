@@ -21,6 +21,13 @@ urlpatterns += i18n_patterns(
     path('', include('books.urls')),
 )
 
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
 admin.site.site_header = 'Bookishop Admin'
 admin.site.index_title = 'Site administration'
 admin.site.site_title = 'Bookishop'
