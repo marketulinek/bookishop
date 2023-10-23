@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify
 
@@ -10,6 +11,10 @@ class MissingSlugUrlSettingsAttribute(Exception):
 
 
 class SlugUrl(models.Model):
+    """
+    Abstract model providing a unique slug
+    field for the URL of the child model.
+    """
     slug = models.SlugField(max_length=300, unique=True)
 
     class Meta:
@@ -27,6 +32,7 @@ class SlugUrl(models.Model):
         return reverse(view_name, kwargs={'slug': self.slug})
 
     def generate_slug(self, from_field, prefix_length=8, prefix_allowed_chars='0123456789'):
+        # TODO: documentation
         unique_prefix = get_random_string(prefix_length, prefix_allowed_chars)
         self.slug = slugify(f"{unique_prefix} {from_field}")
 
@@ -81,6 +87,7 @@ class Author(SlugUrl):
 
 class Book(SlugUrl):
     BOOK_FORMAT = [
+        # TODO: translation
         ('hardcover', 'Hardcover'),
         ('paperback', 'Paperback')
     ]
@@ -100,10 +107,11 @@ class Book(SlugUrl):
     def __str__(self):
         return self.title
 
+    @property
     def is_published(self):
-        # TODO: is_published() in Book model
-        pass
+        return self.published_at <= timezone.now().date()
 
+    @property
     def year_of_publication(self):
         return self.published_at.year
 
