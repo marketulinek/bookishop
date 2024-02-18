@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% if book_inventory.inventory_status.code == 'pre_order' %}
+    <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Pre-order' %}</a>
+{% endif %}
+
+{% if book_inventory.inventory_status.code == 'in_stock' %}
+    <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Add to basket' %}</a>
+{% endif %}
+
+{% if book_inventory.inventory_status.code == 'out_of_stock' %}
+    <a class="btn btn-outline-book color-book disabled" role="button" aria-disabled="true">{% translate 'Add to basket' %}</a>
+{% endif %}

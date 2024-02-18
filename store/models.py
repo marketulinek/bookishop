@@ -59,12 +59,12 @@ class BookInventory(models.Model):
         if not self.for_sale:
             # Book is not published yet
             # Or there are no plans to sell this book anymore
-            return _('Unavailable')
+            return {'code': 'unavailable', 'text': _('Unavailable')}
 
         if not self.book.is_published and self.in_stock:
-            return _('Pre-order')
+            return {'code': 'pre_order', 'text': _('Pre-order')}
 
         if self.in_stock:
-            return _('In Stock')
+            return {'code': 'in_stock', 'text': _('In Stock')}
 
-        return _('Out of Stock')
+        return {'code': 'out_of_stock', 'text': _('Out of Stock')}
