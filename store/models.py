@@ -38,9 +38,13 @@ class BookInventory(models.Model):
     def for_sale(self):
         return self.max_stock_limit > 0 or self.quantity_available > 0
 
-    @admin.display(boolean=True)
+    @property
     def in_stock(self):
         return self.quantity_available > 0
+
+    @admin.display(boolean=True)
+    def in_stock_admin(self):
+        return self.in_stock
 
     @admin.display(boolean=True)
     def pre_order(self):

@@ -25,5 +25,5 @@ class InStockFilter(SimpleListFilter):
 @admin.register(BookInventory)
 class BookInventory(admin.ModelAdmin):
     list_display = ['book', 'quantity_in_hand', 'quantity_to_be_delivered',
-                    'in_stock', 'pre_order']
+                    'in_stock_admin', 'pre_order']
     list_filter = [InStockFilter]
