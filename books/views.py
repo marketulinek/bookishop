@@ -30,10 +30,13 @@ class BookDetailView(DetailView):
     context_object_name = 'book'
     template_name = 'books/book_detail.html'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.select_related('author', 'publisher', 'category', 'bookinventory')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['book_details'] = self.get_book_details()
-        context['book_inventory'] = BookInventory.objects.get(book=self.object)
         return context
 
     def get_book_details(self):
