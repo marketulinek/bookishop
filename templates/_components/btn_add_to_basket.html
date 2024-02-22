@@ -1,7 +1,9 @@
 {% load i18n %}
 
 {% if book.bookinventory.inventory_status.code == 'pre_order' %}
-    <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Pre-order' %}</a>
+    <a class="btn btn-outline-book color-book" href="#" role="button">
+        {% translate 'Pre-order' context 'A button to perform an action' %}
+    </a>
 {% endif %}
 
 {% if book.bookinventory.inventory_status.code == 'in_stock' %}
