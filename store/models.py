@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 from books.models import Book
@@ -21,7 +23,7 @@ class BookInventory(models.Model):
     max_stock_limit = models.PositiveIntegerField(default=0)
 
     # When book units (quantity_available) reach this point,
-    # purchase order to supplier must be generated (TODO).
+    # the purchase order to supplier must be generated (TODO).
     reorder_point = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -68,3 +70,13 @@ class BookInventory(models.Model):
             return {'code': 'in_stock', 'text': _('In Stock')}
 
         return {'code': 'out_of_stock', 'text': _('Out of Stock')}
+
+
+# ------------------------------
+#            SIGNALS
+# ------------------------------
+
+@receiver(post_save, sender=Book)
+def create_book_inventory(sender, instance, created, **kwargs):
+    if created:
+        BookInventory.objects.create(book=instance)
