@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from .models import Book, Category
+from store.models import BookInventory
 
 
 class CategoryListView(ListView):
@@ -28,6 +29,10 @@ class BookDetailView(DetailView):
     model = Book
     context_object_name = 'book'
     template_name = 'books/book_detail.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.select_related('author', 'publisher', 'category', 'bookinventory')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

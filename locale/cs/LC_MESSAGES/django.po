@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-16 18:43+0000\n"
-"PO-Revision-Date: 2023-09-24 18:46+0000\n"
+"POT-Creation-Date: 2024-02-22 20:54+0000\n"
+"PO-Revision-Date: 2024-02-18 09:40+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -12,7 +12,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
-"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: store/models.py:62
+msgid "Unavailable"
+msgstr "Nedostupné"
+
+#: store/models.py:65
+msgid "Pre-order"
+msgstr "Předobjednávka"
+
+#: store/models.py:68
+msgid "In Stock"
+msgstr "Skladem"
+
+#: store/models.py:70
+msgid "Out of Stock"
+msgstr "Není skladem"
 
 #: templates/_base.html:48
 msgid "Log Out"
@@ -38,13 +53,18 @@ msgstr "Seznam přání"
 msgid "About"
 msgstr "O projektu"
 
-#: templates/_components/book_card.html:36 templates/books/book_detail.html:36
-msgid "Add to basket"
-msgstr "Do košíku"
-
 #: templates/_components/book_list_slider.html:17
 msgid "More"
 msgstr "Více"
+
+#: templates/_components/btn_add_to_basket.html:5
+msgctxt "A button to perform an action"
+msgid "Pre-order"
+msgstr "Předobjednat"
+
+#: templates/_components/btn_add_to_basket.html:10
+msgid "Add to basket"
+msgstr "Do košíku"
 
 #: templates/_components/btn_login_signup.html:4
 msgid "Login"

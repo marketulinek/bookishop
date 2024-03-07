@@ -10,6 +10,7 @@ RUN apt-get update \
 WORKDIR /code
 
 COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+COPY ./requirements-dev.txt .
+RUN pip install -r requirements-dev.txt
 
 COPY . .
