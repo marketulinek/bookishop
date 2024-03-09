@@ -77,7 +77,7 @@ msgstr "Registrace"
 
 #: templates/books/book_detail.html:37
 msgid "Add to wishlist"
-msgstr "Do košíku"
+msgstr "Přidat na seznam přání"
 
 #: templates/categories/books_by_category.html:29
 msgid "There are no books in this category"
