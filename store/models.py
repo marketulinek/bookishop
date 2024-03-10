@@ -8,6 +8,13 @@ from books.models import Book
 
 
 class BookInventory(models.Model):
+    INVENTORY_STATUS = {
+        'unavailable': _('Unavailable'),
+        'pre_order': _('Pre-order'),
+        'in_stock': _('In Stock'),
+        'out_of_stock': _('Out of Stock'),
+    }
+
     book = models.OneToOneField(Book, on_delete=models.CASCADE, primary_key=True)
     quantity_in_hand = models.PositiveIntegerField(default=0)
 
@@ -44,13 +51,20 @@ class BookInventory(models.Model):
     def in_stock(self):
         return self.quantity_available > 0
 
-    @admin.display(boolean=True)
-    def in_stock_admin(self):
-        return self.in_stock
+    @property
+    def inventory_status_code(self):
+        if not self.for_sale:
+            # Book is not published yet
+            # Or there are no plans to sell this book anymore
+            return 'unavailable'
 
-    @admin.display(boolean=True)
-    def pre_order(self):
-        return not self.book.is_published
+        if not self.book.is_published and self.in_stock:
+            return 'pre_order'
+
+        if self.in_stock:
+            return 'in_stock'
+
+        return 'out_of_stock'
 
     @property
     def inventory_status(self):
@@ -58,18 +72,15 @@ class BookInventory(models.Model):
         Status defined mainly for customers
         to be shown on the book detail page.
         """
-        if not self.for_sale:
-            # Book is not published yet
-            # Or there are no plans to sell this book anymore
-            return _('Unavailable')
+        return self.INVENTORY_STATUS.get(self.inventory_status_code)
 
-        if not self.book.is_published and self.in_stock:
-            return _('Pre-order')
+    @admin.display(boolean=True)
+    def in_stock_admin(self):
+        return self.in_stock
 
-        if self.in_stock:
-            return _('In Stock')
-
-        return _('Out of Stock')
+    @admin.display(boolean=True)
+    def pre_order(self):
+        return not self.book.is_published
 
 
 # ------------------------------
