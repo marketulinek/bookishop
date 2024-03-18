@@ -42,7 +42,10 @@
                 <p class="card-text">{{ book.bookinventory.inventory_status }}</p>
                 <div class="d-grid gap-2">
                     {% include '_components/btn_add_to_basket.html' %}
-                    <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Add to wishlist' %}</a>
+                    <form hx-post="{% url 'add_to_wishlist' book.slug %}" class="d-grid">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-book color-book">{% translate 'Add to wishlist' %}</button>
+                    </form>
                 </div>
             </div>
         </div>
