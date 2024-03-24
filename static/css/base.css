@@ -26,6 +26,9 @@ mark, .background-book {
 .btn-switch-lang:after {
     content: none;
 }
+.btn-delete {
+    width: 48px;
+}
 .link-outline-book:hover {
     background-color: rgb(243, 231, 219);
 }
@@ -74,5 +77,12 @@ mark, .background-book {
 }
 .no-book-cover svg {
     margin-top: 50px;
+    color: rgb(150, 122, 102);
+}
+.no-book-cover-mini {
+    height: 100px;
+    background-color: rgba(243, 231, 219, 0.3);
+}
+.no-book-cover-mini svg {
     color: rgb(150, 122, 102);
 }

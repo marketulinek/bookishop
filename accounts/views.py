@@ -1,10 +1,11 @@
 import json
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.utils import IntegrityError
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.views import generic
+from django.views.generic import ListView, CreateView
 from django.views.decorators.http import require_http_methods
 
 from .forms import CustomUserCreationForm
@@ -12,10 +13,19 @@ from .models import Wishlist
 from books.models import Book
 
 
-class SignupPageView(generic.CreateView):
+class SignupPageView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
+
+class WishlistListView(LoginRequiredMixin, ListView):
+    context_object_name = 'wishlist'
+    template_name = 'wishlist.html'
+
+    def get_queryset(self):
+        wishlist = Wishlist.objects.filter(user=self.request.user)
+        return wishlist.select_related('book').select_related('book__author').select_related('book__bookinventory')
 
 
 @require_http_methods(['POST'])
