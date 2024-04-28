@@ -26,9 +26,6 @@ mark, .background-book {
 .btn-switch-lang:after {
     content: none;
 }
-.btn-delete {
-    width: 48px;
-}
 .link-outline-book:hover {
     background-color: rgb(243, 231, 219);
 }

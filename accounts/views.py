@@ -48,3 +48,23 @@ def add_to_wishlist(request, slug):
     return HttpResponse(status=204, headers={'HX-Trigger': json.dumps({
         'showMessage': {'level': toast[0], 'message': toast[1]}
     })})
+
+
+@require_http_methods(['POST'])
+def remove_from_wishlist(request, slug):
+
+    if not request.user.is_authenticated:
+        toast = ('danger', _('You have to be logged in.'))
+    else:
+        try:
+            book = Book.objects.get(slug=slug)
+            Wishlist.objects.get(user=request.user, book=book).delete()
+            toast = ('success', _('The book has been removed from your wishlist.'))
+        except Book.DoesNotExist:
+            toast = ('danger', _('The book does not exist!'))
+        except Exception:
+            toast = ('danger', _('An error occurred!'))
+
+    return HttpResponse(status=200, headers={'HX-Trigger': json.dumps({
+        'showMessage': {'level': toast[0], 'message': toast[1]}
+    })})
