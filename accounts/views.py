@@ -45,7 +45,7 @@ def add_to_wishlist(request, slug):
         except Exception:
             toast = ('danger', _('An error occurred!'))
 
-    return HttpResponse(status=204, headers={'HX-Trigger': json.dumps({
+    return HttpResponse(status=200, headers={'HX-Trigger': json.dumps({
         'showMessage': {'level': toast[0], 'message': toast[1]}
     })})
 
