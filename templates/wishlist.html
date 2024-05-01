@@ -44,6 +44,8 @@
                         </div>
                     </div>
                 </li>
+                {% empty %}
+                <li class="list-group-item text-center fw-light">{% translate "You don't have any books on your wishlist" %}</li>
                 {% endfor %}
             </ul>
         </div>
