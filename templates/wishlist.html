@@ -28,7 +28,8 @@
                                 {% endif %}
                             </div>
                             <div class="col-sm">
-                                <h4>{{ item.book.title }}</h4>
+                                <h4><a href="{% url 'book_detail' item.book.slug %}"
+                                       class="text-reset text-decoration-none">{{ item.book.title }}</a></h4>
                                 <h6>{{ item.book.author }}</h6>
                             </div>
                             <div class="col-sm-2 col-md-3 align-self-center d-flex justify-content-end">
@@ -45,7 +46,9 @@
                     </div>
                 </li>
                 {% empty %}
-                <li class="list-group-item text-center fw-light">{% translate "You don't have any books on your wishlist" %}</li>
+                <li class="list-group-item text-center fw-light">
+                    {% translate "You don't have any books on your wishlist" %}
+                </li>
                 {% endfor %}
             </ul>
         </div>
