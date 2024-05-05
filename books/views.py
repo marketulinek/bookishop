@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from .models import Book, Category
-from store.models import BookInventory
+from accounts.models import Wishlist
 
 
 class CategoryListView(ListView):
@@ -37,6 +37,7 @@ class BookDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['book_details'] = self.get_book_details()
+        context['book_on_wishlist'] = self.on_wishlist()
         return context
 
     def get_book_details(self):
@@ -50,3 +51,8 @@ class BookDetailView(DetailView):
             'Categories': self.object.category,
             'ISBN13': '-'
         }
+
+    def on_wishlist(self):
+        if self.request.user.is_authenticated:
+            return Wishlist.objects.filter(user=self.request.user, book=self.object).exists()
+        return False
