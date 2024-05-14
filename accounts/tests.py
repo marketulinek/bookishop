@@ -58,11 +58,21 @@ class WishlistForAnonymousUserTests(TestCase):
 
 class WishlistForAuthenticatedUserTests(TestCase):
 
-    def test_authenticated_user_can_see_wishlist_page(self):
-        testerka = CustomUser.objects.create_user('testerka', 'terka.testerka@bookishop.com', 'I.love.b00ks')
-        self.client.force_login(testerka)
+    @classmethod
+    def setUpTestData(cls):
+        cls.testerka = CustomUser.objects.create_user('testerka', 'terka.testerka@bookishop.com', 'I.love.b00ks')
 
+    def setUp(self):
+        self.client.force_login(self.testerka)
+
+    def test_authenticated_user_can_see_wishlist_page(self):
         response = self.client.get(reverse('wishlist'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Wishlist')
         self.assertTemplateUsed(response, 'wishlist.html')
+
+    def test_user_has_empty_wishlist(self):
+        response = self.client.get(reverse('wishlist'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "You don't have any books on your wishlist")
+        self.assertNotContains(response, 'Harry Potter')
