@@ -45,3 +45,11 @@ class SignUpPageTests(TestCase):
         form = self.response.context.get('form')
         self.assertIsInstance(form, CustomUserCreationForm)
         self.assertContains(self.response, 'csrfmiddlewaretoken')
+
+
+class WishlistForAnonymousUserTests(TestCase):
+
+    def test_anonymous_cannot_see_wishlist_page(self):
+        response = self.client.get(reverse('wishlist'))
+        destination_url = '/accounts/login/?next=/en/accounts/wishlist/'
+        self.assertRedirects(response, destination_url, target_status_code=302)
