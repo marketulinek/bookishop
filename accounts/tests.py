@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .forms import CustomUserCreationForm
+from .models import CustomUser
 
 
 class CustomUserTests(TestCase):
@@ -53,3 +54,15 @@ class WishlistForAnonymousUserTests(TestCase):
         response = self.client.get(reverse('wishlist'))
         destination_url = '/accounts/login/?next=/en/accounts/wishlist/'
         self.assertRedirects(response, destination_url, target_status_code=302)
+
+
+class WishlistForAuthenticatedUserTests(TestCase):
+
+    def test_authenticated_user_can_see_wishlist_page(self):
+        testerka = CustomUser.objects.create_user('testerka', 'terka.testerka@bookishop.com', 'I.love.b00ks')
+        self.client.force_login(testerka)
+
+        response = self.client.get(reverse('wishlist'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Wishlist')
+        self.assertTemplateUsed(response, 'wishlist.html')
