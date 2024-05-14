@@ -3,7 +3,8 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .forms import CustomUserCreationForm
-from .models import CustomUser
+from .models import CustomUser, Wishlist
+from books.models import Author, Book, Category, Publisher
 
 
 class CustomUserTests(TestCase):
@@ -61,6 +62,19 @@ class WishlistForAuthenticatedUserTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.testerka = CustomUser.objects.create_user('testerka', 'terka.testerka@bookishop.com', 'I.love.b00ks')
+        cls.bloomsbury = Publisher.objects.create(name='Bloomsbury')
+        cls.fantasy = Category.objects.create(name='Fantasy', slug='fantasy')
+        cls.rowling = Author.objects.create(first_name='Joanne', middle_name='K.', last_name='Rowling')
+
+        cls.harry_potter = Book.objects.create(
+            title='Harry Potter',
+            author=cls.rowling,
+            publisher=cls.bloomsbury,
+            category=cls.fantasy,
+            format='paperback',
+            description='Boy Who Lived',
+            published_at='1997-06-26'
+        )
 
     def setUp(self):
         self.client.force_login(self.testerka)
@@ -75,4 +89,11 @@ class WishlistForAuthenticatedUserTests(TestCase):
         response = self.client.get(reverse('wishlist'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "You don't have any books on your wishlist")
-        self.assertNotContains(response, 'Harry Potter')
+        self.assertNotContains(response, self.harry_potter.title)
+
+    def test_user_has_book_on_wishlist(self):
+        Wishlist.objects.create(user=self.testerka, book=self.harry_potter)
+        response = self.client.get(reverse('wishlist'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.harry_potter.title)
+        self.assertNotContains(response, "You don't have any books on your wishlist")
