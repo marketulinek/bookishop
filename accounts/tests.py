@@ -84,6 +84,10 @@ class WishlistForAnonymousUserTests(TestCase):
         response = self.client.get(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
         self.assertEqual(response.status_code, 405)
 
+    def test_add_to_wishlist_auth_required(self):
+        response = self.client.post(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 401)
+
 
 class WishlistForAuthenticatedUserTests(TestCase):
 
