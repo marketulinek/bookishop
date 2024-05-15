@@ -87,8 +87,10 @@ class WishlistForAuthenticatedUserTests(TestCase):
     def setUpTestData(cls):
         cls.testerka = CustomUser.objects.create_user('testerka', 'terka.testerka@bookishop.com', 'I.love.b00ks')
         cls.bloomsbury = Publisher.objects.create(name='Bloomsbury')
+        cls.feiwel_friends = Publisher.objects.create(name='Feiwel & Friends')
         cls.fantasy = Category.objects.create(name='Fantasy', slug='fantasy')
         cls.rowling = Author.objects.create(first_name='Joanne', middle_name='K.', last_name='Rowling')
+        cls.meyer = Author.objects.create(first_name='Marissa', last_name='Meyer')
 
         cls.harry_potter = Book.objects.create(
             title='Harry Potter',
@@ -98,6 +100,15 @@ class WishlistForAuthenticatedUserTests(TestCase):
             format='paperback',
             description='Boy Who Lived',
             published_at='1997-06-26'
+        )
+        cls.cinder = Book.objects.create(
+            title='Cinder',
+            author=cls.meyer,
+            publisher=cls.feiwel_friends,
+            category=cls.fantasy,
+            format='hardcover',
+            description='Cinder, a gifted mechanic, is a cyborg',
+            published_at='2012-01-03'
         )
 
     def setUp(self):
@@ -121,3 +132,18 @@ class WishlistForAuthenticatedUserTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.harry_potter.title)
         self.assertNotContains(response, "You don't have any books on your wishlist")
+
+    def test_add_to_wishlist_button_visibility(self):
+        """Tests the button located on the book detail page"""
+        button_part = '>Add to wishlist</button>'
+        Wishlist.objects.create(user=self.testerka, book=self.harry_potter)
+
+        # Cinder is not on the user's wishlist -> button should be visible
+        r_cinder = self.client.get(self.cinder.get_absolute_url())
+        self.assertEqual(r_cinder.status_code, 200)
+        self.assertContains(r_cinder, button_part)
+
+        # Harry Potter is on the user's wishlist -> button should not be visible
+        r_harry_potter = self.client.get(self.harry_potter.get_absolute_url())
+        self.assertEqual(r_harry_potter.status_code, 200)
+        self.assertNotContains(r_harry_potter, button_part)
