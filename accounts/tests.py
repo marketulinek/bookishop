@@ -51,10 +51,34 @@ class SignUpPageTests(TestCase):
 
 class WishlistForAnonymousUserTests(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        cls.bloomsbury = Publisher.objects.create(name='Bloomsbury')
+        cls.fantasy = Category.objects.create(name='Fantasy', slug='fantasy')
+        cls.rowling = Author.objects.create(first_name='Joanne', middle_name='K.', last_name='Rowling')
+        cls.harry_potter = Book.objects.create(
+            title='Harry Potter',
+            author=cls.rowling,
+            publisher=cls.bloomsbury,
+            category=cls.fantasy,
+            format='paperback',
+            description='Boy Who Lived',
+            published_at='1997-06-26'
+        )
+
     def test_anonymous_cannot_see_wishlist_page(self):
         response = self.client.get(reverse('wishlist'))
         destination_url = '/accounts/login/?next=/en/accounts/wishlist/'
         self.assertRedirects(response, destination_url, target_status_code=302)
+
+    def test_add_to_wishlist_button_visibility(self):
+        """Tests the button located on the book detail page.
+
+        The button should be always visible when the user is anonymous
+        to show him that the feature exists."""
+        response = self.client.get(self.harry_potter.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '>Add to wishlist</button>')
 
 
 class WishlistForAuthenticatedUserTests(TestCase):
