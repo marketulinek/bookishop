@@ -80,6 +80,10 @@ class WishlistForAnonymousUserTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '>Add to wishlist</button>')
 
+    def test_add_to_wishlist_method_get_not_allowed(self):
+        response = self.client.get(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 405)
+
 
 class WishlistForAuthenticatedUserTests(TestCase):
 
@@ -147,3 +151,7 @@ class WishlistForAuthenticatedUserTests(TestCase):
         r_harry_potter = self.client.get(self.harry_potter.get_absolute_url())
         self.assertEqual(r_harry_potter.status_code, 200)
         self.assertNotContains(r_harry_potter, button_part)
+
+    def test_add_to_wishlist_method_get_not_allowed(self):
+        response = self.client.get(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 405)
