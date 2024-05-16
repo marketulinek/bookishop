@@ -159,3 +159,10 @@ class WishlistForAuthenticatedUserTests(TestCase):
     def test_add_to_wishlist_method_get_not_allowed(self):
         response = self.client.get(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
         self.assertEqual(response.status_code, 405)
+
+    def test_add_to_wishlist_method_post(self):
+        old_count = Wishlist.objects.count()
+        response = self.client.post(reverse('add_to_wishlist', args=[self.cinder.slug]))
+        self.assertEqual(response.status_code, 200)
+        new_count = Wishlist.objects.count()
+        self.assertEqual(new_count, old_count + 1)
