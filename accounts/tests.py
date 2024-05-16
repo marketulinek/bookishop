@@ -88,6 +88,14 @@ class WishlistForAnonymousUserTests(TestCase):
         response = self.client.post(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
         self.assertEqual(response.status_code, 401)
 
+    def test_remove_from_wishlist_method_get_not_allowed(self):
+        response = self.client.get(reverse('remove_from_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 405)
+
+    def test_remove_from_wishlist_auth_required(self):
+        response = self.client.post(reverse('remove_from_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 401)
+
 
 class WishlistForAuthenticatedUserTests(TestCase):
 
@@ -174,3 +182,15 @@ class WishlistForAuthenticatedUserTests(TestCase):
     def test_add_to_wishlist_book_already_added(self):
         response = self.client.post(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
         self.assertEqual(response.status_code, 200)
+
+    def test_remove_from_wishlist_method_get_not_allowed(self):
+        response = self.client.get(reverse('remove_from_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 405)
+
+    def test_remove_from_wishlist_method_post(self):
+        Wishlist.objects.create(user=self.testerka, book=self.harry_potter)
+        old_count = Wishlist.objects.count()
+        response = self.client.post(reverse('remove_from_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 200)
+        new_count = Wishlist.objects.count()
+        self.assertEqual(new_count, old_count - 1)
