@@ -166,3 +166,11 @@ class WishlistForAuthenticatedUserTests(TestCase):
         self.assertEqual(response.status_code, 200)
         new_count = Wishlist.objects.count()
         self.assertEqual(new_count, old_count + 1)
+
+    def test_add_to_wishlist_book_does_not_exist(self):
+        response = self.client.post(reverse('add_to_wishlist', args=['non-existent-slug']))
+        self.assertEqual(response.status_code, 400)
+
+    def test_add_to_wishlist_book_already_added(self):
+        response = self.client.post(reverse('add_to_wishlist', args=[self.harry_potter.slug]))
+        self.assertEqual(response.status_code, 200)
