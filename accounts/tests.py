@@ -101,7 +101,8 @@ class WishlistForAuthenticatedUserTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.testerka = CustomUser.objects.create_user('testerka', 'terka.testerka@bookishop.com', 'I.love.b00ks')
+        cls.testerka = CustomUser.objects.create_user('testerka', 'testerka@bookishop.com', 'I.love.b00ks')
+        cls.knihomolka = CustomUser.objects.create_user('knihomolka', 'knihomolka@bookishop.com', 'I.love.b00ks')
         cls.bloomsbury = Publisher.objects.create(name='Bloomsbury')
         cls.feiwel_friends = Publisher.objects.create(name='Feiwel & Friends')
         cls.fantasy = Category.objects.create(name='Fantasy', slug='fantasy')
@@ -127,6 +128,8 @@ class WishlistForAuthenticatedUserTests(TestCase):
             published_at='2012-01-03'
         )
 
+        Wishlist.objects.create(user=cls.testerka, book=cls.harry_potter)
+
     def setUp(self):
         self.client.force_login(self.testerka)
 
@@ -137,13 +140,16 @@ class WishlistForAuthenticatedUserTests(TestCase):
         self.assertTemplateUsed(response, 'wishlist.html')
 
     def test_user_has_empty_wishlist(self):
+        # Switch to user with empty wishlist
+        self.client.logout()
+        self.client.force_login(self.knihomolka)
+
         response = self.client.get(reverse('wishlist'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "You don't have any books on your wishlist")
         self.assertNotContains(response, self.harry_potter.title)
 
     def test_user_has_book_on_wishlist(self):
-        Wishlist.objects.create(user=self.testerka, book=self.harry_potter)
         response = self.client.get(reverse('wishlist'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.harry_potter.title)
@@ -152,7 +158,6 @@ class WishlistForAuthenticatedUserTests(TestCase):
     def test_add_to_wishlist_button_visibility(self):
         """Tests the button located on the book detail page"""
         button_part = '>Add to wishlist</button>'
-        Wishlist.objects.create(user=self.testerka, book=self.harry_potter)
 
         # Cinder is not on the user's wishlist -> button should be visible
         r_cinder = self.client.get(self.cinder.get_absolute_url())
@@ -188,7 +193,6 @@ class WishlistForAuthenticatedUserTests(TestCase):
         self.assertEqual(response.status_code, 405)
 
     def test_remove_from_wishlist_method_post(self):
-        Wishlist.objects.create(user=self.testerka, book=self.harry_potter)
         old_count = Wishlist.objects.count()
         response = self.client.post(reverse('remove_from_wishlist', args=[self.harry_potter.slug]))
         self.assertEqual(response.status_code, 200)
