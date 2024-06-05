@@ -76,3 +76,10 @@ mark, .background-book {
     margin-top: 50px;
     color: rgb(150, 122, 102);
 }
+.no-book-cover-mini {
+    height: 100px;
+    background-color: rgba(243, 231, 219, 0.3);
+}
+.no-book-cover-mini svg {
+    color: rgb(150, 122, 102);
+}
