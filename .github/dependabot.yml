@@ -7,3 +7,20 @@ updates:
       day: "monday"
       time: "18:00"
       timezone: "Europe/Prague"
+    groups:
+      Django-security-updates:
+        applies-to: security-updates
+        patterns:
+          - "Django"
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+    ignore:
+      - dependency-name: "Django"
+        update-types: ["version-update:semver-major"]
+    reviewers:
+      - "marketulinek"
