@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from .models import Book, Category
-from accounts.models import Wishlist
+from wishlist.models import Wishlist
 
 
 class CategoryListView(ListView):
