@@ -17,6 +17,7 @@ urlpatterns += i18n_patterns(
     path('rosetta/', include('rosetta.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
+    path('wishlist/', include('wishlist.urls')),
     path('', include('pages.urls')),
     path('', include('books.urls')),
 )

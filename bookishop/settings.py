@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'books.apps.BooksConfig',
     'store.apps.StoreConfig',
+    'wishlist.apps.WishlistConfig',
     # Third Party
     'rosetta',
     'crispy_forms',
