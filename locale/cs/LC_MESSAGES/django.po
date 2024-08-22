@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bookishop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-18 19:45+0000\n"
+"POT-Creation-Date: 2024-08-21 13:04+0000\n"
 "PO-Revision-Date: 2024-02-18 09:40+0000\n"
 "Last-Translator: Marketa\n"
 "Language-Team: Czech\n"
@@ -12,26 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
-
-#: accounts/views.py:25
-msgid "You have to be logged in."
-msgstr "Vyžadováno přihlášení."
-
-#: accounts/views.py:30
-msgid "The book has been added to your wishlist."
-msgstr "Kniha byla přidána na seznam přání."
-
-#: accounts/views.py:32
-msgid "The book does not exist!"
-msgstr "Tato kniha neexistuje!"
-
-#: accounts/views.py:34
-msgid "The book is already on your wishlist."
-msgstr "Tato kniha už je na tvém seznamu."
-
-#: accounts/views.py:36
-msgid "An error occurred!"
-msgstr "Nastala chyba!"
 
 #: store/models.py:12
 msgid "Unavailable"
@@ -65,11 +45,11 @@ msgstr "Kategorie"
 msgid "Order Status"
 msgstr "Objednávky"
 
-#: templates/_base.html:67
+#: templates/_base.html:72 templates/wishlist.html:6
 msgid "Wishlist"
 msgstr "Seznam přání"
 
-#: templates/_base.html:68
+#: templates/_base.html:75
 msgid "About"
 msgstr "O projektu"
 
@@ -95,7 +75,7 @@ msgstr "Přihlásit"
 msgid "Sign Up"
 msgstr "Registrace"
 
-#: templates/books/book_detail.html:47
+#: templates/books/book_detail.html:49
 msgid "Add to wishlist"
 msgstr "Přidat na seznam přání"
 
@@ -131,6 +111,38 @@ msgstr "Přihlásit se"
 msgctxt "Button to confirm sign up action"
 msgid "Sign Up"
 msgstr "Zaregistrovat se"
+
+#: templates/wishlist.html:42
+msgid "Remove"
+msgstr "Odebrat"
+
+#: templates/wishlist.html:50
+msgid "You don't have any books on your wishlist"
+msgstr "Tvůj seznam přání je prázdný"
+
+#: wishlist/views.py:27 wishlist/views.py:54
+msgid "You have to be logged in."
+msgstr "Vyžadováno přihlášení."
+
+#: wishlist/views.py:33
+msgid "The book has been added to your wishlist."
+msgstr "Kniha byla přidána na tvůj seznam přání."
+
+#: wishlist/views.py:36
+msgid "The book is already on your wishlist."
+msgstr "Tato kniha už je na tvém seznamu přání."
+
+#: wishlist/views.py:39 wishlist/views.py:63
+msgid "The book does not exist."
+msgstr "Tato kniha neexistuje."
+
+#: wishlist/views.py:42 wishlist/views.py:66
+msgid "An error occurred."
+msgstr "Nastala chyba."
+
+#: wishlist/views.py:60
+msgid "The book has been removed from your wishlist."
+msgstr "Kniha byla odebrána z tvého seznamu přání."
 
 #~ msgid "Hello reader!"
 #~ msgstr "Ahoj čtenáři!"
