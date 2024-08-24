@@ -1,14 +1,12 @@
-import json
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.utils import IntegrityError
-from django.http import HttpResponse
 from django.utils.translation import gettext as _
 from django.views.generic import ListView
 from django.views.decorators.http import require_http_methods
 
 from .models import Wishlist
 from books.models import Book
+from core.http import HttpToastResponse
 
 
 class WishlistListView(LoginRequiredMixin, ListView):
@@ -24,48 +22,35 @@ class WishlistListView(LoginRequiredMixin, ListView):
 def add_to_wishlist(request, slug):
 
     if not request.user.is_authenticated:
-        toast = ('danger', _('You have to be logged in.'))
-        status_code = 401
+        status, msg = 401, _('You have to be logged in.')
     else:
         try:
             book = Book.objects.get(slug=slug)
             Wishlist(user=request.user, book=book).save()
-            toast = ('success', _('The book has been added to your wishlist.'))
-            status_code = 200
+            status, msg = 200, _('The book has been added to your wishlist.')
         except IntegrityError:
-            toast = ('warning', _('The book is already on your wishlist.'))
-            status_code = 200
+            status, msg = 200, _('The book is already on your wishlist.')
         except Book.DoesNotExist:
-            toast = ('danger', _('The book does not exist.'))
-            status_code = 400
+            status, msg = 400, _('The book does not exist.')
         except Exception:
-            toast = ('danger', _('An error occurred.'))
-            status_code = 400
+            status, msg = 400, _('An error occurred.')
 
-    return HttpResponse(status=status_code, headers={'HX-Trigger': json.dumps({
-        'showMessage': {'level': toast[0], 'message': toast[1]}
-    })})
+    return HttpToastResponse(status, msg).get_response()
 
 
 @require_http_methods(['POST'])
 def remove_from_wishlist(request, slug):
 
     if not request.user.is_authenticated:
-        toast = ('danger', _('You have to be logged in.'))
-        status_code = 401
+        status, msg = 401, _('You have to be logged in.')
     else:
         try:
             book = Book.objects.get(slug=slug)
             Wishlist.objects.get(user=request.user, book=book).delete()
-            toast = ('success', _('The book has been removed from your wishlist.'))
-            status_code = 200
+            status, msg = 200, _('The book has been removed from your wishlist.')
         except Book.DoesNotExist:
-            toast = ('danger', _('The book does not exist.'))
-            status_code = 400
+            status, msg = 400, _('The book does not exist.')
         except Exception:
-            toast = ('danger', _('An error occurred.'))
-            status_code = 400
+            status, msg = 400, _('An error occurred.')
 
-    return HttpResponse(status=status_code, headers={'HX-Trigger': json.dumps({
-        'showMessage': {'level': toast[0], 'message': toast[1]}
-    })})
+    return HttpToastResponse(status, msg).get_response()
