@@ -1,5 +1,6 @@
 import json
 
+from core.utils import debug_print
 from django.http import HttpResponse
 
 
@@ -25,8 +26,7 @@ class HttpToastResponse:
     def _validate_level(self, level):
         levels = ('info', 'success', 'warning', 'danger')
         if level not in levels:
-            # TODO: Raise error during tests only?
-            print(f"Warning: Invalid level '{level}' provided. Defaulting to '{self._set_level()}'")
+            debug_print(f"Warning: Invalid level '{level}' provided. Defaulting to '{self._set_level()}'")
             return None
         return level
 
