@@ -23,7 +23,7 @@ classDiagram
       +author: Author
       +publisher: Publisher
       +category: Category
-      +format: str (choices)
+      +format: tuple
       +description: str
       +published_at: Date
       +cover: ImageField
