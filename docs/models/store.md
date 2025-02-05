@@ -26,4 +26,4 @@ classDiagram
 
 - **Created by Signal**  
   `BookInventory` instances are automatically created when a new `Book` is added.  
-  (See [Signals Documentation](signals.md) for details.)
+  (See [Signals Documentation](../signals.md) for details.)

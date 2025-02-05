@@ -42,4 +42,4 @@ classDiagram
 
 - **Book Created → Triggers BookInventory Creation**  
   When a new `Book` instance is created, a signal automatically creates a corresponding `BookInventory` entry.  
-  (See [Signals Documentation](docs/signals.md) for details.)
+  (See [Signals Documentation](../signals.md) for details.)
