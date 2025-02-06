@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Check if models.py was modified
+if git diff --cached --name-only | grep -q 'models.py'; then
+    echo "models.py was changed. Did you update models.md and signals.md?"
+
+    # Ask the user for confirmation
+    read -p "Press [y] to continue, [n] to cancel commit: " -n 1 -r
+    echo  # Move to a new line
+
+    # If the user does NOT press 'y' or 'Y', cancel commit
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Commit canceled. Update models.md first!"
+        exit 1  # Exit with error → commit fails
+    fi
+fi
+
+# Allow commit if no issues
+exit 0
