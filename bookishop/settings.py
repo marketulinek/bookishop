@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     # Project Apps
     'accounts.apps.AccountsConfig',
     'books.apps.BooksConfig',
-    'cart.apps.CartConfig',
+    'carts.apps.CartsConfig',
     'pages.apps.PagesConfig',
     'store.apps.StoreConfig',
     'wishlist.apps.WishlistConfig',
