@@ -27,8 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Project Apps
     'accounts.apps.AccountsConfig',
-    'pages.apps.PagesConfig',
     'books.apps.BooksConfig',
+    'cart.apps.CartConfig',
+    'pages.apps.PagesConfig',
     'store.apps.StoreConfig',
     'wishlist.apps.WishlistConfig',
     # Third Party
