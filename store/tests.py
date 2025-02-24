@@ -1,7 +1,31 @@
 from django.test import TestCase
 
-from .models import BookInventory
+from .models import BookInventory, BookPrice
 from books.models import Author, Book, Category, Publisher
+
+
+class BookPriceTests(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.publisher = Publisher.objects.create(name='Bloomsbury')
+        cls.category = Category.objects.create(name='Fantasy', slug='fantasy')
+        cls.author = Author.objects.create(first_name='Joanne', middle_name='K.', last_name='Rowling')
+        cls.book = Book.objects.create(
+            title='Harry Potter',
+            author=cls.author,
+            publisher=cls.publisher,
+            category=cls.category,
+            format='paperback',
+            description='Boy Who Lived',
+            published_at='1997-06-26',
+        )
+        cls.book_price = BookPrice.objects.create(book=cls.book, value=10.00, valid_from='2025-01-01')
+
+    def test_book_price_model(self):
+        self.assertEqual(self.book_price.book.title, 'Harry Potter')
+        self.assertEqual(self.book_price.value, 10.00)
+        self.assertEqual(self.book_price.valid_from, '2025-01-01')
 
 
 class BookInventoryTests(TestCase):

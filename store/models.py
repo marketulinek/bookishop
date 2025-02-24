@@ -7,6 +7,21 @@ from django.utils.translation import gettext_lazy as _
 from books.models import Book
 
 
+class BookPrice(models.Model):
+    book = models.ForeignKey(Book, related_name='prices', on_delete=models.CASCADE)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
+    valid_from = models.DateField()
+    valid_until = models.DateField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['book', 'valid_from', 'valid_until'])
+        ]
+
+    def __str__(self):
+        return f"{self.value} EUR - {self.book}"
+
+
 class BookInventory(models.Model):
     INVENTORY_STATUS = {
         'unavailable': _('Unavailable'),
