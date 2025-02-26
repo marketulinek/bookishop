@@ -27,6 +27,10 @@ class BookPriceTests(TestCase):
         self.assertEqual(self.book_price.value, 10.00)
         self.assertEqual(self.book_price.valid_from, '2025-01-01')
 
+    def test_display_price_on_book_detail(self):
+        response = self.client.get(self.book.get_absolute_url())
+        self.assertContains(response, '10.00')
+
 
 class BookInventoryTests(TestCase):
 
