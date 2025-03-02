@@ -28,7 +28,7 @@ class BookPrice(models.Model):
         today = timezone.now().date()
         return cls.objects.filter(
             Q(valid_until__gte=today) | Q(valid_until__isnull=True),
-            valid_from_lte=today,
+            valid_from__lte=today,
             book=book
         ).order_by('valid_from').first()
 
