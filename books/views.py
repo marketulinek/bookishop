@@ -37,7 +37,7 @@ class BookDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['book_price'] = BookPrice.get_current_price(self.object).value
+        context['book_price'] = BookPrice.get_current_price_value(self.object)
         context['book_details'] = self.get_book_details()
         context['book_on_wishlist'] = self.on_wishlist()
         return context

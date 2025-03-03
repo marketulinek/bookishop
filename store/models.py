@@ -32,6 +32,11 @@ class BookPrice(models.Model):
             book=book
         ).order_by('valid_from').first()
 
+    @classmethod
+    def get_current_price_value(cls, book):
+        price_object = cls.get_current_price(book)
+        return price_object.value if price_object else None
+
 
 class BookInventory(models.Model):
     INVENTORY_STATUS = {
