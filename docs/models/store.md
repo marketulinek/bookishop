@@ -10,6 +10,8 @@ classDiagram
         +valid_from: Date
         +valid_until: Date
         +__str__()
+        +get_current_price()
+        +get_current_price_value()
     }
     class BookInventory{
         +book: Book
