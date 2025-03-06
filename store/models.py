@@ -1,10 +1,41 @@
 from django.contrib import admin
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from books.models import Book
+
+
+class BookPrice(models.Model):
+    book = models.ForeignKey(Book, related_name='prices', on_delete=models.CASCADE)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
+    valid_from = models.DateField()
+    valid_until = models.DateField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['book', 'valid_from', 'valid_until'])
+        ]
+
+    def __str__(self):
+        return f"{self.value} EUR - {self.book}"
+
+    @classmethod
+    def get_current_price(cls, book):
+        today = timezone.now().date()
+        return cls.objects.filter(
+            Q(valid_until__gte=today) | Q(valid_until__isnull=True),
+            valid_from__lte=today,
+            book=book
+        ).order_by('valid_from').first()
+
+    @classmethod
+    def get_current_price_value(cls, book):
+        price_object = cls.get_current_price(book)
+        return price_object.value if price_object else None
 
 
 class BookInventory(models.Model):

@@ -37,8 +37,10 @@
     <div class="col">
         <div class="card shop-card">
             <div class="card-body">
-                <h3 class="card-title">499,-</h3>
-                <h6 class="card-subtitle mb-2 text-body-secondary">CZK</h6>
+                {% if book_price %}
+                    <h3 class="card-title">{{ book_price }}</h3>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">EUR</h6>
+                {% endif %}
                 <p class="card-text">{{ book.bookinventory.inventory_status }}</p>
                 <div class="d-grid gap-2">
                     {% include '_components/btn_add_to_basket.html' %}

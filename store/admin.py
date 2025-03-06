@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
 from django.db.models import Q
 
-from .models import BookInventory
+from .models import BookInventory, BookPrice
 
 
 class InStockFilter(SimpleListFilter):
@@ -27,3 +27,8 @@ class BookInventory(admin.ModelAdmin):
     list_display = ['book', 'quantity_in_hand', 'quantity_to_be_delivered',
                     'in_stock_admin', 'pre_order']
     list_filter = [InStockFilter]
+
+
+@admin.register(BookPrice)
+class BookPriceAdmin(admin.ModelAdmin):
+    list_display = ['book', 'value', 'valid_from', 'valid_until']
