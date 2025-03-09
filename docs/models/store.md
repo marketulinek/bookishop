@@ -4,6 +4,15 @@ classDiagram
     direction LR
     class Book
     note for Book "Defined in the Book App"
+    class BookPrice{
+        +book: Book
+        +value: decimal
+        +valid_from: Date
+        +valid_until: Date
+        +__str__()
+        +get_current_price()
+        +get_current_price_value()
+    }
     class BookInventory{
         +book: Book
         +quantity_in_hand: int
@@ -20,6 +29,7 @@ classDiagram
         +pre_order()
     }
     Book "1" *-- "1" BookInventory
+    Book "1" *-- "*" BookPrice
 ```
 
 ## Related Signals
