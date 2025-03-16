@@ -6,6 +6,6 @@
     </a>
 {% endif %}
 
-{% if book.bookinventory.inventory_status_code == 'in_stock' %}
+{% if book.bookinventory.inventory_status_code == 'in_stock' and book_price %}
     <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Add to basket' %}</a>
 {% endif %}
