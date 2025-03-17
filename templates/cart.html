@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<h2 class="mb-5 text-center">{% translate 'Cart' %}</h2>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-xl-10 col-xxl-8">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center fw-light">
+                    {% translate 'Your cart is empty' %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}
