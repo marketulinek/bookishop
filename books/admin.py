@@ -44,4 +44,5 @@ class BookAdmin(admin.ModelAdmin):
     exclude = ['slug']
     list_filter = ['category']
     date_hierarchy = 'published_at'
+    search_fields = ['title']
     inlines = [BookInventoryInline]
