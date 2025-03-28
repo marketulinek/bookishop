@@ -1,5 +1,7 @@
 from django.test import TestCase
+from django.urls import reverse
 
+from accounts.models import CustomUser
 from books.models import Author, Book, Category, Publisher
 from store.models import BookInventory, BookPrice
 
@@ -75,3 +77,29 @@ class AddToBasketButtonVisibilityTests(TestCase):
     @staticmethod
     def _get_part_of_button_html():
         return '>Add to basket</a>'
+
+
+class CurrentCartPageTests(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.testerka = CustomUser.objects.create_user('testerka', 'testerka@bookishop.com', 'I.love.b00ks')
+
+    def setUp(self):
+        self.client.force_login(self.testerka)
+        self.response = self.client.get(reverse('current_cart'))
+
+    def test_anonymous_cannot_see_current_cart_page(self):
+        self.client.logout()
+        response = self.client.get(reverse('current_cart'))
+        destination_url = '/accounts/login/?next=/en/cart/'
+        self.assertRedirects(response, destination_url, target_status_code=302)
+
+    def test_authenticated_user_can_see_current_cart_page(self):
+        self.assertEqual(self.response.status_code, 200)
+        self.assertTemplateUsed(self.response, 'cart.html')
+        self.assertContains(self.response, 'Cart')
+
+    def test_user_has_empty_current_cart(self):
+        self.assertEqual(self.response.status_code, 200)
+        self.assertContains(self.response, 'Your cart is empty')
