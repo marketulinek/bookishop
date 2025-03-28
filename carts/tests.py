@@ -4,11 +4,11 @@ from books.models import Author, Book, Category, Publisher
 from store.models import BookInventory, BookPrice
 
 
-class CartTests(TestCase):
+class AddToBasketButtonVisibilityTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        # Create a book
+        # Create a book (signal sets book inventory quantity to 0)
         cls.bloomsbury = Publisher.objects.create(name='Bloomsbury')
         cls.fantasy = Category.objects.create(name='Fantasy', slug='fantasy')
         cls.rowling = Author.objects.create(first_name='Joanne', middle_name='K.', last_name='Rowling')
@@ -22,7 +22,7 @@ class CartTests(TestCase):
             published_at='1997-06-26'
         )
 
-        # Create a second book
+        # Create a second book with inventory quantity 1
         cls.feiwel_friends = Publisher.objects.create(name='Feiwel & Friends')
         cls.meyer = Author.objects.create(first_name='Marissa', last_name='Meyer')
         cls.cinder = Book.objects.create(
@@ -34,38 +34,44 @@ class CartTests(TestCase):
             description='Cinder, a gifted mechanic, is a cyborg',
             published_at='2012-01-03'
         )
+        BookInventory.objects.filter(book=cls.cinder).update(quantity_in_hand=1)
 
-    def test_add_to_basket_button_visibility_on_book_detail(self):
-        # Book is NOT in stock and has NO price -> Button should NOT be visible
-        with self.subTest('Book is not in stock'):
-            response = self.client.get(self.harry_potter.get_absolute_url())
-            self.assertEqual(response.status_code, 200)
-            self.assertNotContains(response, '>Add to basket</a>')
+    def test_book_not_in_stock_without_price_not_visible(self):
+        """Book is NOT in stock and has NO price -> Button should NOT be visible"""
+        response = self._get_book_detail_response(self.harry_potter)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self._get_part_of_button_html())
 
-        # Book is NOT in stock but has a price -> Button should NOT be visible
-        with self.subTest('Book is not in stock'):
-            BookPrice.objects.create(book=self.harry_potter, value=10.00, valid_from='2025-01-01')
-            response = self.client.get(self.harry_potter.get_absolute_url())
-            self.assertEqual(response.status_code, 200)
-            self.assertNotContains(response, '>Add to basket</a>')
+    def test_book_not_in_stock_with_price_not_visible(self):
+        """Book is NOT in stock but has a price -> Button should NOT be visible"""
+        BookPrice.objects.create(book=self.harry_potter, value=10.00, valid_from='2025-01-01')
+        response = self._get_book_detail_response(self.harry_potter)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self._get_part_of_button_html())
 
-        # The book is in stock but has NO price -> Button should NOT be visible
-        with self.subTest('Book in stock but no price'):
-            BookInventory.objects.filter(book=self.cinder).update(quantity_in_hand=1)
-            response = self.client.get(self.cinder.get_absolute_url())
-            self.assertEqual(response.status_code, 200)
-            self.assertNotContains(response, '>Add to basket</a>')
+    def test_book_in_stock_without_price_not_visible(self):
+        """The book is in stock but has NO price -> Button should NOT be visible"""
+        response = self._get_book_detail_response(self.cinder)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self._get_part_of_button_html())
 
-        # Book is in stock and has NO current price -> Button should NOT be visible
-        with self.subTest('Book in stock with valid price'):
-            BookPrice.objects.create(book=self.cinder, value=10.00, valid_from='2024-01-01', valid_until='2024-12-31')
-            response = self.client.get(self.cinder.get_absolute_url())
-            self.assertEqual(response.status_code, 200)
-            self.assertNotContains(response, '>Add to basket</a>')
+    def test_book_in_stock_without_current_price_not_visible(self):
+        """Book is in stock and has NO current price -> Button should NOT be visible"""
+        BookPrice.objects.create(book=self.cinder, value=10.00, valid_from='2024-01-01', valid_until='2024-12-31')
+        response = self._get_book_detail_response(self.cinder)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self._get_part_of_button_html())
 
-        # Book is in stock and has a valid price -> Button SHOULD be visible
-        with self.subTest('Book in stock with valid price'):
-            BookPrice.objects.create(book=self.cinder, value=10.00, valid_from='2025-01-01')
-            response = self.client.get(self.cinder.get_absolute_url())
-            self.assertEqual(response.status_code, 200)
-            self.assertContains(response, '>Add to basket</a>')
+    def test_book_in_stock_with_current_price_visible(self):
+        """Book is in stock and has a current price -> Button SHOULD be visible"""
+        BookPrice.objects.create(book=self.cinder, value=10.00, valid_from='2025-01-01')
+        response = self._get_book_detail_response(self.cinder)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self._get_part_of_button_html())
+
+    def _get_book_detail_response(self, book):
+        return self.client.get(book.get_absolute_url())
+
+    @staticmethod
+    def _get_part_of_button_html():
+        return '>Add to basket</a>'
