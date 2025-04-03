@@ -7,5 +7,8 @@
 {% endif %}
 
 {% if book.bookinventory.inventory_status_code == 'in_stock' and book_price %}
-    <a class="btn btn-outline-book color-book" href="#" role="button">{% translate 'Add to basket' %}</a>
+    <form hx-post="{% url 'add_to_cart' book.slug %}" class="d-grid">
+        {% csrf_token %}
+        <button class="btn btn-outline-book color-book">{% translate 'Add to basket' %}</button>
+    </form>
 {% endif %}

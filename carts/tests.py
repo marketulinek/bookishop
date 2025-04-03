@@ -76,7 +76,7 @@ class AddToBasketButtonVisibilityTests(TestCase):
 
     @staticmethod
     def _get_part_of_button_html():
-        return '>Add to basket</a>'
+        return '>Add to basket</button>'
 
 
 class CurrentCartPageTests(TestCase):

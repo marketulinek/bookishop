@@ -1,8 +1,10 @@
-from django.db import models
+from django.db import models, transaction
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
+
 from accounts.models import CustomUser
 from books.models import Book
+from store.models import BookPrice
 
 
 class CartStatus(models.TextChoices):
@@ -33,6 +35,14 @@ class Cart(models.Model):
     def __str__(self):
         return f"Cart {self.id} - {self.user or 'Anonymous'} ({self.status})"
 
+    @classmethod
+    def get_or_create_active_cart(cls, user):
+        """
+        Returns the user's active cart or creates one if it doesn't exist.
+        """
+        cart, created = cls.objects.get_or_create(user=user, status=CartStatus.ACTIVE)
+        return cart
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
@@ -46,4 +56,23 @@ class CartItem(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.quantity}x {self.book} in Cart {self.id}"
+        return f"{self.quantity}x {self.book} in Cart {self.cart.id}"
+
+    @classmethod
+    def add_item(cls, user, book, quantity=1):
+        """
+        Adds a book to the user's active cart or updates the quantity if it already exists.
+        """
+        with transaction.atomic():
+            cart = Cart.get_or_create_active_cart(user)
+            price = BookPrice.get_current_price_value(book)
+
+            cart_item, created = cls.objects.select_for_update().get_or_create(
+                cart=cart,
+                book=book,
+                defaults={'quantity': quantity, 'price': price}
+            )
+
+            if not created:
+                cart_item.quantity += quantity
+                cart_item.save()
